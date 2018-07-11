@@ -15,6 +15,42 @@ def english_number(number)
   # writing out right now.
   # write and left...get it? :)
   left = number
+  write = left / 1000000000000
+  left -= write * 1000000000000
+  if write > 0
+    trillions = english_number write
+    num_string = num_string + trillions + ' trillion'
+    if left > 0
+      num_string += ' '
+    end
+  end
+  write = left / 1000000000
+  left -= write * 1000000000
+  if write > 0
+    billions = english_number write
+    num_string = num_string + billions + ' billion'
+    if left > 0
+      num_string += ' '
+    end
+  end
+  write = left / 1000000
+  left -= write * 1000000
+  if write > 0
+    mrillions = english_number write
+    num_string = num_string + mrillions + ' million'
+    if left > 0
+      num_string += ' '
+    end
+  end
+  write = left / 1000
+  left -= write * 1000
+  if write > 0
+    thousands = english_number write
+    num_string = num_string + thousands + ' thousand'
+    if left > 0
+      num_string += ' '
+    end
+  end
   write = left / 100 # How many hundreds left?
   left -= write * 100 # Subtract off those hundreds.
   if write > 0
@@ -23,7 +59,7 @@ def english_number(number)
     num_string = num_string + hundreds + ' hundred'
     if left > 0
       # So we don't write 'two hundredfifty-one'...
-      num_string += ' '
+      num_string += ' and '
     end
   end
   write = left / 10 # How many tens left?
