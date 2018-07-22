@@ -3,7 +3,7 @@
 ###
 ### An example for mac could be '/Users/username/Desktop/pic_dst'
 ### An example for PC could be 'C:/Users/username/Desktop/pic_dst'
-Dir.chdir '<destination>'
+Dir.chdir '/Users/HelenPeng/Desktop/pic_dst'
 
 # First we find all of the pictures to be moved.
 ### In the next line you want the source
@@ -12,7 +12,7 @@ Dir.chdir '<destination>'
 ###
 ### An example for mac could be '/Users/username/Desktop/pic_src/**/*.{JPG,jpg}'
 ### An example for PC could be 'C:/Users/username/Desktop/pic_src/**/*.{JPG,jpg}'
-pic_names = Dir['<source>']
+pic_names = Dir['/Users/HelenPeng/Library/Messages/**/*.{JPG,jpg}']
 
 puts 'What would you like to call this batch?'
 batch_name = gets.chomp
@@ -22,12 +22,28 @@ print "Downloading #{pic_names.length} files: "
 #  though normally I like to count from 0.
 pic_number = 1
 pic_names.each do |name|
-  print '.' # This is our "progress bar".
-  new_name = if pic_number < 10
+  if File.exist?(name)
+    puts name + " already exists, do you want to continue?"
+    res = gets.chomp.upcase
+    loop = true
+    while loop
+      if res == "NO"
+        exit
+        loop = false
+    elsif res == "YES"
+    print '.' # This is our "progress bar".
+    new_name = if pic_number < 10
     "#{batch_name}0#{pic_number}.jpg"
-  else
+    else
     "#{batch_name}#{pic_number}.jpg"
   end
+  loop = false
+else
+  puts "Answer yes or no"
+  res = gets.chomp.upcase 
+end
+end
+end
 
   # Now where were we? Oh, yeah...
   File.rename name, new_name
