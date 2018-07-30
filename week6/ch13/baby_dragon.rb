@@ -103,3 +103,24 @@ class Dragon
 end
 
 # Make it interactive!
+puts "What would you like to name your pet?"
+name = gets.chomp
+pet = Dragon.new name
+
+while true
+  puts "Please enter command(feed, walk, rock, toss, put to bed; press enter to quit):"
+  input = gets.chomp
+  if input == "feed"
+    pet.feed
+  elsif input == "toss"
+    pet.toss
+  elsif input == "walk"
+    pet.walk
+  elsif input == "rock"
+    pet.rock
+  elsif input == "put to bed"
+    pet.put_to_bed
+  elsif input == ""
+    exit
+  end
+end
